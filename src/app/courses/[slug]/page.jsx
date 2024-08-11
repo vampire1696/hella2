@@ -6,6 +6,14 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import wc from "@/lib/woocommerce";
 import { Icon } from "@iconify/react";
@@ -13,12 +21,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Star from "@/components/Star";
+import FormReview from "@/components/FormReview";
 
 const Product = async ({ params }) => {
-  console.log(params);
+  
   const product = await wc.getProductBySlug(params.slug);
   const reviews = await wc.getReviewsOfProductByID(product.id);
-  console.log(product);
+  
   return (
     <section>
       <CustomContainer className="bg-black relative min-h-[280px]">
@@ -115,11 +125,31 @@ const Product = async ({ params }) => {
           <TabsContent value="reviews">
             <CustomContainer className="bg-white mt-16 ">
               {/* Text contain html tag so i need to use dangerouselySetInnerHtml */}
+              <div className="pb-5 ">
+                <FormReview product_id={product.id} />
+              </div>
               {reviews.map((review) => {
                 return (
-                  <div
-                    dangerouslySetInnerHTML={{ __html: review.review }}
-                  ></div>
+                  <div key={review.id} className="pb-3">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>
+                          <Star star={review.rating} />
+                        </CardTitle>
+                        <CardDescription>
+                          {review.reviewer_email || "Anonymous"} -{" "}
+                          {new Date(review.date_created).toLocaleString()}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p>
+                          <div
+                            dangerouslySetInnerHTML={{ __html: review.review }}
+                          ></div>
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
                 );
               })}
             </CustomContainer>

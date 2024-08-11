@@ -16,13 +16,13 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Link from "next/link";
 
 const Courses = async (prop) => {
-  console.log(prop);
   if (!!prop.searchParams.category && !!prop.searchParams.page) {
     return (
       <Category
         params={{
           category: prop.searchParams.category,
           page: prop.searchParams.page,
+          attribute_term: prop.searchParams.attribute_term,
         }}
       />
     );

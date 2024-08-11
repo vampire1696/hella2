@@ -1,3 +1,4 @@
+import ButtonGroup from "@/components/ButtonGroup";
 import CardProduct from "@/components/CardProduct";
 import CustomContainer from "@/components/CustomContainer";
 import CustomPagination from "@/components/CustomPagination";
@@ -13,16 +14,21 @@ import wc from "@/lib/woocommerce";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Filter from "./Filter";
+import DropdownCatergories from "@/components/DropdownCatergories";
+import DropdownFetchDataCategories from "@/components/DropdownFetchDataCategories";
 
 const Category = async ({ params }) => {
-  console.log(params);
+
   const category = await wc.getCategory(params.category);
   const allProductsByCategoryRes = await wc.getProductsByCategory(
     category?.id,
     12,
-    params.page
+    params.page,
+    params.attribute_term
   );
-  console.log(allProductsByCategoryRes.totalPages);
+
+  
   const allProductsByCategory = allProductsByCategoryRes?.productByCategory;
   return (
     <section>
@@ -57,18 +63,23 @@ const Category = async ({ params }) => {
           </div>
           <div className="w-[30%] p-4 flex-col flex rounded-lg items-center">
             <Image
-              src={category.imageSrc ?? "/Academy_1.jpg"}
+              src={category?.imageSrc ?? "/Academy_1.jpg"}
               alt="home banner"
               width={286 * 1.5}
               height={190 * 1.5}
               className="rounded-lg "
             />
+            <DropdownFetchDataCategories />
           </div>
         </div>
       </CustomContainer>
       <CustomContainer className="mt-16 bg-white">
         <div className="flex flex-col items-center">
-          <h1 className=" text-black text-bold text-2xl">Filters</h1>
+          {/* -----------Filter--------- */}
+          <Filter
+            category={params.category}
+            selectedTerm={params.attribute_term}
+          />
           <div className="grid grid-cols-4 gap-10 pt-10">
             {allProductsByCategory?.map((product) => {
               return (
@@ -90,6 +101,7 @@ const Category = async ({ params }) => {
               category={params.category}
               total_pages={allProductsByCategoryRes.totalPages}
               current_page={params.page}
+              attribute_term={params.attribute_term}
             />
           </div>
         </div>

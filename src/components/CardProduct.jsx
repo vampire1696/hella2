@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const CardProduct = ({ image, title, type, duration, level }) => {
   return (
-    <div className="w-[200px] h-[200px] bg-black relative">
+    <div className="w-[250px] h-[215px] bg-black relative">
       <div className="w-[100px] h-[30px] text-white flex justify-center items-center bg-customblue top-0 right-0 z-10 absolute ">
         {type}
       </div>
@@ -25,7 +25,9 @@ const CardProduct = ({ image, title, type, duration, level }) => {
           />
         </AspectRatio>
       </div>
-      <div className="w-full text-white bg-black text-center py-5">{title}</div>
+      <div className="w-full text-white bg-black text-center py-5 text-sm">
+        {title}
+      </div>
     </div>
   );
 };

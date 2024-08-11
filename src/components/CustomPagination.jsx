@@ -10,7 +10,12 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const CustomPagination = ({ total_pages, current_page, category }) => {
+const CustomPagination = ({
+  total_pages,
+  current_page,
+  category,
+  attribute_term,
+}) => {
   return (
     <div>
       <Pagination>
@@ -21,7 +26,9 @@ const CustomPagination = ({ total_pages, current_page, category }) => {
                 <PaginationLink
                   scroll={false}
                   isActive={current_page == index + 1}
-                  href={`/courses?category=${category}&page=${index + 1}`}
+                  href={`/courses?category=${category}&page=${index + 1}${
+                    !attribute_term ? "" : `&attribute_term=${attribute_term}`
+                  }`}
                 >
                   {index + 1}
                 </PaginationLink>

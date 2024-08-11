@@ -16,6 +16,7 @@ class Woocomerce {
       },
     });
   }
+
   async getReviewsOfProductByID(productID) {
     try {
       const res = await this.#axiosInstant.get("/products/reviews", {
@@ -26,6 +27,51 @@ class Woocomerce {
     } catch (error) {
       console.log(error.message);
       return [];
+    }
+  }
+  async createReview(
+    product_id,
+    rating,
+    review,
+    reviewer = undefined,
+    reviewer_email = undefined
+  ) {
+    try {
+      const res = await this.#axiosInstant.post("/products/reviews", {
+        product_id,
+        rating,
+        review,
+        reviewer,
+        reviewer_email,
+      });
+      return res.data;
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  }
+  async createProduct(name, description, sourcelink) {
+    try {
+      const res = await this.#axiosInstant.post("/products", {
+        name,
+        type: "simple",
+        description,
+        short_description: "Recommend Product",
+        attributes: [
+          {
+            id: 0,
+            name: "source_link",
+            slug: "source_link",
+            position: 4,
+            visible: true,
+            variation: false,
+            options: [sourcelink],
+          },
+        ],
+      });
+    } catch (error) {
+      console.log(error.message);
+      return null;
     }
   }
   async getProductBySlug(slug) {
@@ -60,6 +106,18 @@ class Woocomerce {
       return [];
     }
   }
+  async getAllCategoriesComplete(per_page = 20) {
+    try {
+      const res = await this.#axiosInstant.get("/products/categories", {
+        params: { per_page },
+      });
+      const categories = res.data;
+      return categories;
+    } catch (error) {
+      console.log(error.message);
+      return [];
+    }
+  }
   async getCategory(slug) {
     try {
       const res = await this.#axiosInstant.get("/products/categories", {
@@ -76,15 +134,24 @@ class Woocomerce {
       return null;
     }
   }
-  async getProductsByCategory(categoryId, per_page = 12, page = 1) {
+  async getProductsByCategory(
+    categoryId,
+    per_page = 12,
+    page = 1,
+    attribute_term = undefined,
+    searchText = undefined
+  ) {
     try {
       const res = await this.#axiosInstant.get("/products", {
         params: {
           category: categoryId, //search Params in Woocommerce api documentation
           per_page,
           page,
+          search: searchText,
           orderby: "title",
           order: "asc",
+          attribute: !!attribute_term ? "pa_deli_format" : undefined,
+          attribute_term,
         },
       });
       const allProductsByCategory = res.data;
@@ -97,6 +164,33 @@ class Woocomerce {
     } catch (error) {
       console.log(error.message);
       return {};
+    }
+  }
+  async getDeliFormatTerm() {
+    try {
+      const res = await this.#axiosInstant.get("/products/attributes/5/terms");
+      const deliFormatTerm = res.data;
+      return deliFormatTerm;
+    } catch (error) {
+      console.log(error.message);
+      return [];
+    }
+  }
+  async getProductByDeliFormatTerm(categoryId, attribute_term, searchText) {
+    try {
+      const res = await this.#axiosInstant.get("/products", {
+        params: {
+          category: categoryId,
+          attribute: "pa_deli_format",
+          attribute_term,
+          search: searchText,
+        },
+      });
+      const productByDeliFormat = res.data;
+      return productByDeliFormat;
+    } catch (error) {
+      console.log(error.message);
+      return [];
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Inter, Jost } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import { Toaster } from "@/components/ui/sonner";
 
 const font = Jost({ subsets: ["latin"] });
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${font.className}`}>
         <Nav />
+        <Toaster />
         <div className="bg-gray-200 pb-10">{children}</div>
         {/* Footer */}
         <div className="flex justify-center items-center bg-black py-5">
