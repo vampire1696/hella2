@@ -16,7 +16,7 @@ function filterProductsByAttribute(products, attributeName, attributeValue) {
         });
       });
     } else {
-      console.error("filterProductsByAttribute không phải là một mảng:");
+      console.error("filterProductsByAttribute is not a Array:");
     }
 }
 

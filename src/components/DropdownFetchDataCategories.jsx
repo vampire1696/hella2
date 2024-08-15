@@ -2,25 +2,6 @@ import React from "react";
 import DropdownCatergories from "./DropdownCatergories";
 import wc from "@/lib/woocommerce";
 
-// const buildCategoryTree = (categories) => {
-//   const map = {};
-//   categories.forEach((category) => {
-//     map[category.id] = { ...category, chidren: [] };
-//   });
-//   console.log({ map });
-//   const tree = [];
-//   categories.forEach((category) => {
-//     if (category.parent === 162) {
-//       tree.push(map[category.id]);
-//     } else {
-//       if (map[category.parent]) {
-//         map[category.parent].children?.push(map[category.id]);
-//       }
-//     }
-//   });
-//   console.log({ tree });
-//   return tree;
-// };
 function buildCategoryHierarchy(categories) {
   // Tạo một bản đồ để lưu trữ các category theo id của chúng
   const categoryMap = {};
@@ -54,7 +35,7 @@ const DropdownFetchDataCategories = async () => {
   const allcategory = await wc.getAllCategoriesComplete(100);
 
   const allCategoryTree = buildCategoryHierarchy(allcategory);
-  console.log("ALLCATE", allCategoryTree);
+
   return (
     <div>
       <DropdownCatergories tree={allCategoryTree} />

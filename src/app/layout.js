@@ -14,15 +14,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${font.className}`}>
-        <Nav />
         <Toaster />
-        <div className="bg-gray-200 pb-10">{children}</div>
-        {/* Footer */}
-        <div className="flex justify-center items-center bg-black py-5">
-          <p className="text-white font-bold text-2xl">
-            Global Engineering Academy
-          </p>
-        </div>
+        <div>{children}</div>
       </body>
     </html>
   );

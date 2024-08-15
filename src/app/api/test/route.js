@@ -35,38 +35,7 @@ function buildCategoryHierarchy(categories) {
 
   return rootCategories;
 }
-// const buildCategoryTree = (categories) => {
-//   const map = new Map();
-//   categories.forEach((category) => {
-//     map.set(category.id, { ...category, chidren: [] });
-//   });
-//   console.log(Object.keys(map));
 
-//   categories.forEach((category) => {
-//     // if (category.parent === 162) {
-//     //   tree.push(map.get(category.id));
-//     // } else {
-//     //   if (map.has(category.parent)) {
-//     //     //map.get(category.parent).children?.push(map.get(category.id));
-//     //     const target = map.get(category.parent);
-//     //     map.set(category.parent, {
-//     //       ...target,
-//     //       children: [...target.children, map.get(category.id)],
-//     //     });
-//     //   }
-//     // }
-//     if (map.has(category.parent)) {
-//       const target = map.get(category.parent);
-//       map.set(category.parent, {
-//         ...target,
-//         children: [...target.children, map.get(category.id)],
-//       });
-//     }
-//   });
-
-//   const tree = Array.from(map.values());
-//   return tree;
-// };
 function getArray() {
   return [
     {

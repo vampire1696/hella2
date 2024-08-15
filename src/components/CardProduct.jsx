@@ -5,18 +5,18 @@ import { Button } from "./ui/button";
 
 const CardProduct = ({ image, title, type, duration, level }) => {
   return (
-    <div className="w-[250px] h-[215px] bg-black relative">
+    <div className="w-[250px] h-[230px] bg-black relative">
       <div className="w-[100px] h-[30px] text-white flex justify-center items-center bg-customblue top-0 right-0 z-10 absolute ">
         {type}
       </div>
-      <div className="w-[200px] relative ">
+      <div className="w-[250px] relative ">
         {/* Phai co height width vi la absolute */}
-        <div className="absolute top-0 text-white w-[200px] h-[100px] bg-black bg-opacity-70 z-[9] opacity-0 hover:opacity-100 px-3 pt-7">
+        <div className="absolute top-0 text-white w-[250px] h-[130px] bg-black bg-opacity-70 z-[9] opacity-0 hover:opacity-100 px-3 pt-7">
           Level:{level}
           <br />
           Duration:{duration} hours
         </div>
-        <AspectRatio ratio={16 / 8}>
+        <AspectRatio className="w-full border" ratio={16 / 8}>
           <Image
             src={image}
             alt="Image Product"
