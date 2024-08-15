@@ -109,7 +109,7 @@ export default function Home() {
 
 const CustomCard = ({ icon, title, desc }) => {
   return (
-    <div className="flex flex-col rounded-sm p-2 bg-lightblue w-[205px]">
+    <div className="flex flex-col rounded-sm p-2 bg-blue w-[205px]">
       <div className="flex justify-end ">
         <div className="bg-white rounded-full w-[40px] h-[40px] items-center justify-center flex">
           <Icon height={25} width={25} icon={icon} />
