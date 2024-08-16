@@ -29,7 +29,7 @@ const Category = async ({ params }) => {
     params.attribute_term
   );
   const childCategories = await wc.getAllCategories(category.id, 20);
-  console.log(childCategories);
+
   const allProductsByCategory = allProductsByCategoryRes?.productByCategory;
   return (
     <section>
