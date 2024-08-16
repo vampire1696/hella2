@@ -96,15 +96,11 @@ const SubCategories = ({ allSubCategories }) => {
       <div className="flex flex-col items-center">
         <div className="grid grid-cols-4 gap-5 pt-10">
           {allSubCategories.map(({ name, slug, image }) => {
-            //neu can them logic thi viet { roi sau do return () }
             return (
               <Link key={slug} href={`/courses?category=${slug}&page=1`}>
                 <div className="w-[200px] relative ">
-                  {/* Phai co height width vi la absolute */}
-
                   <AspectRatio ratio={16 / 8}>
                     <Image
-                      // src={image?.src ? image.src : "/Academy_1.jpg"}
                       src={image?.src ?? "/Academy_1.jpg"}
                       alt="Image Category"
                       fill
@@ -131,7 +127,6 @@ const FilterProduct = ({
   return (
     <CustomContainer className="mt-16 bg-white">
       <div className="flex flex-col items-center">
-        {/* -----------Filter--------- */}
         <Filter category={category} selectedTerm={attribute_term} />
         <div className="grid grid-cols-4 gap-10 pt-10">
           {allProductsByCategory?.map((product) => {
@@ -148,7 +143,7 @@ const FilterProduct = ({
             );
           })}
         </div>
-        {/* Pagination */}
+
         <div className="mt-10">
           <CustomPagination
             category={category}
